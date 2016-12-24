@@ -1,0 +1,262 @@
+\documentclass[a4paper, 12pt, twoside]{scrreprt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{t1enc}
+
+\usepackage[intoc]{nomencl}
+\usepackage{enumerate,color}
+\usepackage{url}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage{appendix}
+\usepackage{eso-pic}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[nottoc]{tocbibind}
+
+\usepackage[format=plain,labelformat=simple,labelsep=colon]{caption}
+\usepackage{placeins}
+
+\usepackage{tabularx}
+
+\usepackage{graphicx}
+\usepackage[sf,normalsize]{subfigure}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{circuitikz}
+\usepackage{tikz,pgffor}
+\usetikzlibrary{calc,through,intersections, matrix}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
+\usepackage{geometry}
+
+\usepackage{siunitx}
+\usepackage{cancel}
+
+\usepackage[style=ieee, backend=biber]{biblatex}
+
+\usepackage{multirow}
+%\usepackage[table,xcdraw]{xcolor}
+
+
+\setlength{\parskip}{\baselineskip}
+\setlength{\parindent}{0cm}
+\raggedbottom
+
+\def\thesisyear{2016}       					
+\def\thesismonth{December}						
+\def\thesisauthor{\href{http://saumiko.github.io}{Asif Mohaimen, Asif Mohaimen, Asif Mohaimen}}
+\def\thesistitle{4-Bit Arithmatic Unit Design} 						
+\def\thesisshorttitle{4-bit Addition, Subtraction, Increment \& Decrement in arithmetic logic unit} 	
+\def\thesiscredits{ } 							
+\def\thesissubject{Digital Logic Design}							
+
+\def\thesisschool{North South University}
+\def\thesisfaculty{Dept. of Computer Science \& Engineering}
+
+\def\thesisnroftutors{1}						
+\def\thesistutors{Is not my concern}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate [above=0cm] (toppoint) at (current page.north);
+  % Merki Háskóla Íslands.
+  \node[anchor=north] (logonator) at ($(toppoint)+(0cm,-4.2cm)$) {
+    \includegraphics[width=4.2cm]{./nsulogo}
+    };
+
+  % Titill ritgerðar
+  \node[anchor=north, align=center] (titlenator) at ($(logonator.south)+(0cm,-3.0cm)$) {
+    \huge \sffamily \bfseries \thesistitle
+    };
+
+  \coordinate [above=0cm] (bottompoint) at (current page.south);
+
+  % Staðsetning texta um deild og verkefnagerð
+  \node[anchor=base, 
+  		minimum width=\paperwidth, 
+        align=center] at ($(bottompoint)+(0cm,3.4cm)$)  
+    {
+    \parbox{
+      1\paperwidth
+      }{
+      \centering
+      \bfseries\sffamily \Large 
+      \thesissubject \\
+      \thesisfaculty \\
+	  \thesisschool \\
+	  \thesismonth~\thesisyear
+      }
+    };
+
+  \node[anchor=north, align=center] (authornator) at ($(titlenator.south)+(0cm,-1.0cm)$) {
+    \normalfont \Large \sffamily \thesisauthor
+	};
+    
+  \node[anchor=north, align=center] (advisornator) at ($(authornator.south)+(0cm,-1.0cm)$) {
+	\parbox{
+      1\paperwidth
+      }{
+      \centering
+      \sffamily \Large Course Teacher\\
+      \thesistutors
+      }
+    };
+
+  % Nafn höfundar
+  \node[anchor=north, align=center] (authornator) at ($(advisornator.south)+(0cm,-1.0cm)$) {
+    \normalfont \sffamily  \thesiscredits~
+	};
+    
+\end{tikzpicture}
+
+\newpage 
+
+\end{titlepage}
+\pagenumbering{roman}
+
+\setcounter{page}{1}
+\section*{\huge Abstract}
+The task was to create an arithmetic logic unit that will compute four operations in general. They are completed in one circuit using the \href{http://www.cburch.com/logisim/}{Logisim} simulation  tool by \href{http://www.cburch.com/}{Dr. Carl Burch}
+\vfill
+\newpage
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\chapter{Introduction}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\section{Arithmetic Logic Unit}
+An arithmetic logic unit (ALU) is a combinational digital electronic circuit that performs arithmetic and bitwise operations on integer binary numbers.
+
+The inputs to an ALU are the data to be operated on, called operands, and a code indicating the operation to be performed and, optionally, status information from a previous operation; the ALU's output is the result of the performed operation. In many designs, the ALU also exchanges additional information with a status register, which relates to the result of the current or previous operations.
+
+\section{Performed Operations}
+\subsection{Arithmetic Operations}
+\begin{itemize}
+\item \textbf{Add:} A, B and Carry\textsubscript{in} are summed and the sum appears at Output and Carry\textsubscript{out}.
+\item \textbf{Subtract:} B is subtracted from A and the difference appears at Output and Carry\textsubscript{out}. For this function, Carry\textsubscript{out} is effectively a "borrow" indicator. 
+\item \textbf{Increment:} A is increased by one and the resulting value appears at output.
+\item \textbf{Decrement:} A is decreased by one and the resulting value appears at output.
+\end{itemize}
+
+\subsection{Logical Operations}
+\begin{itemize}
+\item \textbf{AND:} the bitwise AND of A and B appears at output.
+\item \textbf{OR:} the bitwise OR of A and B appears at output.
+\item \textbf{Exclusive-OR:} the bitwise XOR of A and B appears at output.
+\item \textbf{Invert:} all bits of A (or B) are inverted and appear at output.
+\end{itemize}
+\chapter{Methodology}
+\pagenumbering{arabic}
+\setcounter{page}{3}
+\section{Full Adder Design}
+For the completion of the project we had to design a full adder at first. For this we have used two XOR Gates, two AND gates and one OR gate. The diagram was like it is shown in figure~\ref{Fa}.
+\begin{center}
+\begin{figure}[h]
+\begin{center}
+\resizebox{2in}{!}{\includegraphics*{./FullAdder.png}}
+\end{center} 
+\caption{Full Adder diagram \label{Fa}}
+\end{figure}
+\end{center}
+The truth table for this full adder is shown in table ~\ref{ttFa}.
+\begin{table}[h]
+\centering
+\caption{Truth Table for Full Adder}
+\label{ttFa}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Inputs}}  & \multicolumn{2}{c|}{\textbf{Outputs}} \\ \hline
+\textbf{A} & \textbf{B} & \textbf{Cin} & \textbf{Sum}      & \textbf{Cout}     \\ \hline
+0          & 0          & 0            & 0                 & 0                 \\ \hline
+0          & 0          & 1            & 0                 & 1                 \\ \hline
+0          & 1          & 0            & 0                 & 1                 \\ \hline
+0          & 1          & 1            & 1                 & 0                 \\ \hline
+1          & 0          & 0            & 0                 & 1                 \\ \hline
+1          & 0          & 1            & 1                 & 0                 \\ \hline
+1          & 1          & 0            & 1                 & 0                 \\ \hline
+1          & 1          & 1            & 1                 & 1                 \\ \hline
+\end{tabular}
+\end{table}
+The SUM is created just by using the boolean equations shown below:
+\[ S = A  \oplus  B  \oplus  C \]
+\[ C_{out} = (A  \bullet B) + (C_{in}  \bullet (A  \oplus B)) \]
+\clearpage
+\section{4 bit adder}
+After creating the Full adder We have just concatenated four full adders together to produce an output of the summation of a 4-bit number. The logic circuit for this adder is shown in Figure ~\ref{Fa4}
+\begin{center}
+\begin{figure}[h]
+\begin{center}
+\resizebox{4.5in}{!}{\includegraphics*{./4bitFull.png}}
+\end{center} 
+\caption{4 bit Full Adder diagram \label{Fa4}}
+\end{figure}
+\end{center}
+This module will solely serve the purpose of the addition operation.
+\subsection{4 bit Subtraction}
+For binary subtraction we have used the most significantly used method for subtraction. Suppose we have to subtract B from A then we have taken the 2's compliment\footnote{Inverting all the bits of a number and increment it by 1} of B and added it with A using the 4 bit Adder we have previously designed before. Our 2's complement module worked like it is shown in figure ~\ref{compliment}. The input number will be given by B pins and output of the 2's compliment of B will be received from the O pins. After that the O pins will be connected to the B inputs of the 4 bit adder to get the final subtraction result. C\textsubscript{out} pin will show the borrow output in the 4 bit adder.
+\begin{center}
+\begin{figure}[h]
+\begin{center}
+\resizebox{4.5in}{!}{\includegraphics*{./2scompliment.png}}
+\end{center} 
+\caption{2's compliment of B \label{compliment}}
+\end{figure}
+\end{center}
+\section{Increment \& Decrement}
+For the increment \& decrement we have just used the two previously built 4 bit adder \& subtractor modules. To increment the number by 1 we have just sent the input for B as 0001 to increase or decrease the input number in A by 1.
+\section{Putting it altogether}
+\subsection{DEMUX}
+As we have to put it altogether in the end so we had to create a DEMUX for routing the inputs to separate modules. The smallest DEMUX unit is shown in figure ~\ref{demux}. This is repeated 8 times to create separate output lines for the 4 modules. The truth table for this small unit goes like it is shown in table ~\ref{demuxtable}.
+\begin{table}[h]
+\centering
+\caption{Truth table for DEMUX}
+\label{demuxtable}
+\begin{tabular}{|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{Input} & \multirow{2}{*}{Selected Output} \\ \cline{1-2}
+A            & B            &                                  \\ \hline
+0            & 0            & Sum                              \\ \hline
+0            & 1            & Subtract                         \\ \hline
+1            & 0            & Increment                        \\ \hline
+1            & 1            & Decrement                        \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{center}
+\begin{figure}[h]
+\begin{center}
+\resizebox{1.5in}{!}{\includegraphics*{./comb28.png}}
+\end{center} 
+\caption{DEMUX \label{demux}}
+\end{figure}
+\end{center}
+
+\subsection{MUX}
+After computing the outputs we also had to display the output in one single output pin. So that we had to use the multiplexer module to perform this task. One smallest unit of the multiplexer is shown in Figure ~\ref{mux}. There are 5 of them to display the 5 different outputs in 5 separate pins. Which are O\textsubscript{1}, O\textsubscript{2}, O\textsubscript{3}, O\textsubscript{4}, and Carry\textsubscript{out}/Borrow\textsubscript{out} respectively. The truth table will be the same as it is shown in table ~\ref{demuxtable}.
+
+\begin{center}
+\begin{figure}[h]
+\begin{center}
+\resizebox{2in}{!}{\includegraphics*{./MUX.png}}
+\end{center} 
+\caption{MUX \label{mux}}
+\end{figure}
+\end{center}
+
+\chapter{Summary}
+\pagenumbering{arabic}
+\setcounter{page}{8}
+So basically what we have done here was, we have taken two lines for selecting the operation to be performed which is shown in table ~\ref{demuxtable}. After selecting the operation we have sent our numbers using the input pins and after performing the necessary operations inside the ALU we finally had our output from out 5 output pins.
+
+\begin{center}
+\href{http://saumiko.github.io}{\textsc{The End}}
+\end{center}
+\end{document}

@@ -1,0 +1,57 @@
+%
+% Skjal til að þætta inní aðalskjal
+%
+\section{Efni fengið frá ytra skjali}
+Þetta efni er sótt úr skránni \emph{YtraEfniFyrirInclude.tex}. Hægt er að nota nokkrar skipanir til að þætta inn önnur skjöl.
+\begin{itemize}
+	\item {\textbackslash}input, færir inn texta án frekari vinnslu.
+    \item {\textbackslash}include, færir inn texta 
+		og setur {\textbackslash}clearpage í byrjun og enda texta.
+    \item {\textbackslash}includeonly\{filename,filename2,...\}, skal setja
+    	í {\glqq}Preamble{\grqq} til að velja hvaða skrár eru sótta með 
+        {\textbackslash}include.
+\end{itemize}
+Hægt er að teikna rafrásir með TikZ, sjá mynd~\ref{fig:TikZCircuit}.
+\begin{figure}[!ht]
+  \caption{Einföld RL rafrás.}
+  \begin{center}
+    \begin{circuitikz}[american voltages, american currents, scale=0.50]
+      \draw
+        (0,0) to[short, -*] (5,0)
+        to[short, *-* ] (10,0)
+        to[short, *-* ] (15,0)
+        to[short, *-  ] (20,0)
+        ;
+      \draw
+        (0,0) to[I, l_=$\SI{20}{\ampere}$] (0,5)
+        (5,0) to[R, l_=$\SI{0,5}{\ohm}$] (5,5)
+        (10,0) to[L, l_=$\SI{5}{\henry}$, i^<=$i_L$] (10,5)
+        (15,0) to[R, l_=$\SI{20}{\ohm}$, v^>=$\nu_0$, i_<=$i_0$, *-*] (15,5)
+        (20,0) to[R, l_=$\SI{10}{\ohm}$ ] (20,5)
+        ;
+      \draw
+        (0,5) to[short, -*] (5,5)
+        (5,5) to[opening switch, -*, l_=$t{=}0$] (10,5)
+        (10,5) to[short] (15,5)
+        (15,5) to[short] (20,5)
+        ;
+    \end{circuitikz}
+  \end{center}
+  \label{fig:TikZCircuit}
+\end{figure}
+\subsubsection{Dæmi um texta úr rafrásargreiningu:}
+	Látum $i$ vera fall einungis af tíma, þá getum við aðskilið jöfnurnar með
+	\begin{align*}
+		-R i &=  L \frac{di}{dt} && \Leftrightarrow \\
+		-\frac{R}{L} dt &=  \frac{di}{i}
+	\end{align*}
+	með því að heilda báðar hliðar frá tímapunktinum $0^+$ til $t$ og straumi $i_0$ til $i$
+	fæst
+	\begin{align}
+		\int_{i_0}^{i} \frac{dy}{y} &= -\frac{R}{L} \int_{0^+}^{t}  d\tau  
+			&& \Leftrightarrow \nonumber \\
+		\ln \left( \frac{i(t)}{i_0} \right) &= -\frac{R}{L} t
+			&& \Leftrightarrow \nonumber \\
+		i(t) &= i_0 e^{-\frac{R}{L} t} \label{equ:NaturalRLsolution}
+\end{align}
+þá er hægt að vísa í jöfnu~\ref{equ:NaturalRLsolution}.
