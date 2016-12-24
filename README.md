@@ -4,7 +4,7 @@ This was an assignment given to someone by a course teacher of [North South Univ
 
 Now I am giving the sources here just because if you use it at all you can also donate me to buy something new. :santa:
 
-The project is explained throughly in this [report](https://github.com/saumiko/4bitALUlogisim/blob/master/Report/Report.pdf). You will find the final circuit in [this](https://github.com/saumiko/NSU_DLD_Project/blob/master/ALU.circ) file. You will need [Logisim](https://sourceforge.net/projects/circuit/) to see the whole thing. 
+The project is explained throughly in this [report](https://github.com/saumiko/NSU_DLD_Project/blob/master/Report/Report.pdf). You will find the final circuit in [this](https://github.com/saumiko/NSU_DLD_Project/blob/master/Logisim%20Circuit/ALU.circ) file. You will need [Logisim](https://sourceforge.net/projects/circuit/) to see the whole thing. 
 
 ##Operations Performed
 - Sum
